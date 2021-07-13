@@ -3,6 +3,7 @@ import { useState } from 'react'
 import '../styles/tasklist.scss'
 
 import { FiTrash, FiCheckSquare } from 'react-icons/fi'
+import { findAllInRenderedTree } from 'react-dom/test-utils';
 
 interface Task {
   id: number;
@@ -36,7 +37,11 @@ export function TaskList() {
 
   function handleToggleTaskCompletion(id: number) {
     // Altere entre `true` ou `false` o campo `isComplete` de uma task com dado ID
-    const tasksUpdated = tasks.map(task => task.id === id ? { ...task, iscompleted: !task.isComplete } : task);
+
+    const tasksUpdated = tasks
+      .map(task =>
+        task.id === id ? { ...task, isComplete: !task.isComplete } : task
+      );
 
     setTasks(tasksUpdated)
   }
